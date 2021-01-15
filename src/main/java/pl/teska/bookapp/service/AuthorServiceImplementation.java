@@ -33,9 +33,12 @@ public class AuthorServiceImplementation implements AuthorService {
     }
 
     @Override
-    public boolean updateAuthor(Author author) {
-        Author newAuthor = authorRepo.save(author);
-        return authorRepo.findById(author.getId()).get().equals(newAuthor);
+    public Author updateAuthor(Author author, long id) {
+        Author authorToUpdate = getAuthorById(id);
+        authorToUpdate.setFirstName(author.getFirstName());
+        authorToUpdate.setLastName(author.getLastName());
+        authorRepo.save(authorToUpdate);
+        return authorToUpdate;
     }
 
     @Override

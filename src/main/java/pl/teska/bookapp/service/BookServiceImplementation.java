@@ -33,8 +33,19 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
-    public boolean updateBook(Book book) {
-        Book newBook = bookRepo.save(book);
-        return bookRepo.findById(book.getId()).get().equals(newBook);
+    public Book updateBook(Book book, long id) {
+        Book bookToUpdate = getBookById(id);
+        bookToUpdate.setTitle(book.getTitle());
+        bookToUpdate.setAuthor(book.getAuthor());
+        bookToUpdate.setIsbn(book.getIsbn());
+        bookRepo.save(bookToUpdate);
+        return bookToUpdate;
     }
+
+    @Override
+    public Book getBookById(long id) {
+        return bookRepo.getBookById(id);
+    }
+
+
 }

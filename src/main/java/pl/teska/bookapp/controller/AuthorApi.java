@@ -42,10 +42,8 @@ public class AuthorApi {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> updateAuthor(@RequestBody Author author) {
-        boolean bookCheck = authorService.updateAuthor(author);
-        if (bookCheck) {
-            return new ResponseEntity<>(true, HttpStatus.OK);
-        } else return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable long id) {
+        return new ResponseEntity<>(authorService.updateAuthor(author, id), HttpStatus.OK);
+    }
 }

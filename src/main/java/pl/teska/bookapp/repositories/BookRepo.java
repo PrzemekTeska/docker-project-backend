@@ -6,4 +6,6 @@ import pl.teska.bookapp.model.Book;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
+
+    Book getBookById(long id);
 }
