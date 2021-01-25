@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bookapp-backend-deploy
+  name: bookapp-backend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookapp-backend-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bookapp-backend-deploy
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/labproj23/bookapp-backend:latest
+        name: bookapp-backend
+        ports:
+        - containerPort: 8080
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: bookapp-cmap
+        - secretRef:
+            name: bookapp-secret
+status: {}
